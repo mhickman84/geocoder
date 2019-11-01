@@ -82,7 +82,7 @@ defmodule Geocoder.Providers.OpenStreetMaps do
   end
 
   defp geocode_coords(%{"lat" => lat, "lon" => lon}) do
-    [lat, lon] = [lat, lon] |> Enum.map(&String.to_float(&1))
+    [lat, lon] = [lat, lon] |> Enum.map(elem(&Float.parse(&1), 0))
     %Geocoder.Coords{lat: lat, lon: lon}
   end
 
