@@ -82,8 +82,10 @@ defmodule Geocoder.Providers.OpenStreetMaps do
   end
 
   defp geocode_coords(%{"lat" => lat, "lon" => lon}) do
-    [lat, lon] = [lat, lon] |> Enum.map(&String.to_float(&1))
-    %Geocoder.Coords{lat: lat, lon: lon}
+    [lat, lon] = [lat, lon]
+    parsedLat = elem(Float.parse(lat), 0)
+    parsedLon = elem(Float.parse(lon), 0)
+    %Geocoder.Coords{lat: parsedLat, lon: parsedLon}
   end
 
   defp geocode_coords(_), do: %Geocoder.Coords{}
