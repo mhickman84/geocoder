@@ -91,7 +91,7 @@ defmodule Geocoder.Providers.OpenStreetMaps do
   defp geocode_coords(_), do: %Geocoder.Coords{}
 
   defp geocode_bounds(%{"boundingbox" => bbox}) do
-    [north, south, west, east] = bbox |> Enum.map(&String.to_float(&1))
+    [north, south, west, east] = bbox |> Enum.map(&elem(Float.parse(&1), 0))
     %Geocoder.Bounds{top: north, right: east, bottom: south, left: west}
   end
 
